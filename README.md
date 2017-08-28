@@ -23,11 +23,11 @@ Dependencies
 ------------
 Install through apt-get install:
 
-mupen64plus 
-python-dev
-libandroid-properties1 
-gtk2.0 
-build-essential libgtk2.0-dev 
+* mupen64plus 
+* python-dev
+* libandroid-properties1 
+* gtk2.0 
+* build-essential libgtk2.0-dev 
 gstreamer1.0 libblas-dev 
 liblapack-dev 
 gfortran 
