@@ -18,7 +18,7 @@ The model was trained with:
 
 With even a small training set the model is sometimes able to generalize to a new track (Royal Raceway seen above).
 
-On IBM Power Systems
+To run on IBM Power Systems
 --------------------
 
 Install IBM PowerAI for IBM Power Systems:
@@ -35,6 +35,10 @@ IBM Power Systems S822LC for High Performance Computing (8335-GTB) is the hardwa
 
 Software requirements
 Ubuntu 16.04 LTS
+
+Then, source /opt/DL/tensorflow/bin/tensorflow-activate
+
+You can also install through apt-get python-yaml
 
 Dependencies
 ------------
