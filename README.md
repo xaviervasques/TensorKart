@@ -21,9 +21,128 @@ With even a small training set the model is sometimes able to generalize to a ne
 
 Dependencies
 ------------
-* `python` and `pip` then run `pip install -r requirements.txt`
-* `mupen64plus` (install via apt-get)
+Install through apt-get install:
 
+mupen64plus 
+python-dev
+libandroid-properties1 
+gtk2.0 
+build-essential libgtk2.0-dev 
+gstreamer1.0 libblas-dev 
+liblapack-dev 
+gfortran 
+libhdf5-dev 
+build-essential libssl-dev 
+libffi-dev python-dev 
+libgtk2.0-dev 
+libgtk-3-dev 
+libjpeg-dev 
+libtiff-dev 
+libsdl1.2-dev 
+libgstreamer-plugins-base0.10-dev 
+libnotify-dev 
+freeglut3 
+freeglut3-dev 
+libsm-dev 
+libwebkitgtk-dev 
+libwebkitgtk-3.0-dev 
+libgstreamer-plugins-base1.0-dev 
+joystick 
+libfreetype6
+libfreetype6-dev
+libpng-dev
+zlib1g-dev
+g++
+nasm
+libjson-c2
+libjson-c-dev
+
+
+Install through pip install:
+inputs 
+matplotlib 
+numpy 
+cython 
+scikit-image 
+termcolor 
+keras 
+h5py 
+pillow 
+pygame 
+wxPython
+
+Install vglrun
+
+The mupen64plus install: 
+#!/bin/bash
+mkdir mupen64plus-src && cd "$_"
+git clone https://github.com/mupen64plus/mupen64plus-core
+git clone https://github.com/kevinhughes27/mupen64plus-input-bot
+cd mupen64plus-input-bot
+make all
+sudo make install
+
+#!/bin/bash
+cd gym-mupen64plus
+
+# Install the gym-mupen64plus package (and dependencies)
+pip install -e .
+
+For playstation controllers, add (before [Keyboard])in /usr/share/games/mupen64plus/InputAutoCfg.ini
+
+[Sony Computer Entertainment Wireless Controller]
+plugged = True
+plugin = 2
+mouse = False
+AnalogDeadzone = 4096,4096
+AnalogPeak = 32767,32767
+DPad R = hat(0 Right)
+DPad L = hat(0 Left)
+DPad D = hat(0 Down)
+DPad U = hat(0 Up)
+Start = button(9)
+Z Trig = button(6)
+B Button = button(0)
+A Button = button(1)
+C Button R = axis(2+)
+C Button L = axis(2-)
+C Button D = axis(5+)
+C Button U = axis(5-)
+R Trig = button(5)
+L Trig = button(4)
+Mempack switch =
+Rumblepak switch =
+X Axis = axis(0-, 0+)
+Y Axis = axis(1-, 1+)
+
+If you use Xbox controller or others, modify in utils.py: 
+
+def _monitor_controller(self):
+        while True:
+            events = get_gamepad()
+            for event in events:
+                if event.code == 'ABS_Y':
+                    self.LeftJoystickY = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+                elif event.code == 'ABS_X':
+                    self.LeftJoystickX = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+                    
+by 
+
+def _monitor_controller(self):
+        while True:
+            events = get_gamepad()
+            for event in events:
+                if event.code == 'ABS_Y':
+                    self.LeftJoystickY = (event.state / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+                elif event.code == 'ABS_X':
+                    self.LeftJoystickX = (event.state / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+
+The goal is to normalize the inputs from record.py to -1 and 1
+
+For TensorFlow:
+Create a file ~/.matplotlib/matplotlibrc there and add the following code: 
+
+backend: TkAgg
 
 Recording Samples
 -----------------
@@ -72,22 +191,6 @@ Play
 ----
 The `play.py` program will use the [`gym-mupen64plus`](https://github.com/bzier/gym-mupen64plus) environment to execute the trained agent against the MarioKart environment. The environment will provide the screenshots of the emulator. These images will be sent to the model to acquire the joystick command to send. The AI joystick commands can be overridden by holding the 'LB' button on the controller.
 
-
-Future Work / Ideas:
---------------------
-* Add a reinforcement layer based on lap time or other metrics so that the AI can start to teach itself now that it has a baseline. The environment currently provides a reward signal of `-1` per time-step, which gives the AI agent a metric to calculate its performance during each race (episode), the goal being to maximize reward and therefore, minimize overall race duration.
-* Could also have a shadow mode where the AI just draws out what it would do rather than sending actions. A real self driving car would have this and use it a lot before letting it take the wheel.
-* Deep learning is all about data; perhaps a community could form around collecting a large amount of data and pushing the performance of this AI.
-
-
-Special Thanks To
------------------
-* https://github.com/SullyChen/Autopilot-TensorFlow
-
-
-Contributing
-------------
-Open a PR! I promise I am friendly :)
 
 Settings VirtualBox
 -------------------
