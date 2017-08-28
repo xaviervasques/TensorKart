@@ -88,3 +88,8 @@ Special Thanks To
 Contributing
 ------------
 Open a PR! I promise I am friendly :)
+
+Settings VirtualBox
+-------------------
+In virtualbox settings, in display, check “Enable 2D Video Acceleration”
+
