@@ -18,6 +18,23 @@ The model was trained with:
 
 With even a small training set the model is sometimes able to generalize to a new track (Royal Raceway seen above).
 
+On IBM Power Systems
+--------------------
+
+Install IBM PowerAI for IBM Power Systems:
+	https://www.ibm.com/bs-en/marketplace/deep-learning-platform/details
+
+PowerAI is a software distribution for machine learning running on the Enterprise Platform for AI: IBM Power Systems. IBM PowerAI includes most ML/DL frameworks built with optimized versions of leading frameworks including: Caffe-bvlc, Caffe-ibm, Caffe-nv, Chainer, DIGITS, Torch, Theano, and TensorFlow.
+
+Hardware requirements
+IBM Power Systems S822LC for High Performance Computing (8335-GTB) is the hardware platform built for PowerAI.
+•	2 POWER8 CPUs
+•	128GB of memory, or greater, recommended
+•	NVIDIA® Tesla® P100 with NVLink GPUs strongly recommended
+•	NVIDIA NVLink interface to Tesla GPUs strongly recommended
+
+Software requirements
+Ubuntu 16.04 LTS
 
 Dependencies
 ------------
@@ -142,6 +159,7 @@ For TensorFlow:
 Create a file ~/.matplotlib/matplotlibrc there and add the following code: 
 
 backend: TkAgg
+
 
 Recording Samples
 -----------------
