@@ -24,9 +24,9 @@ def resize_image(img):
 
 
 class Screenshot(object):
-    SRC_W = 640
-    SRC_H = 480
-    SRC_D = 3
+    IMG_W = 640
+    IMG_H = 480
+    IMG_D = 3
 
     OFFSET_X = 0
     OFFSET_Y = 0
@@ -78,6 +78,15 @@ class XboxController(object):
         rb = self.RightBumper
         return [x, y, a, b, rb]
 
+ # if you use PS4 controler, you have to change as follows:
+ #def _monitor_controller(self):
+ #       while True:
+ #           events = get_gamepad()
+ #           for event in events:
+ #               if event.code == 'ABS_Y':
+ #                   self.LeftJoystickY = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+ #               elif event.code == 'ABS_X':
+ #                   self.LeftJoystickX = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
 
     def _monitor_controller(self):
         while True:
