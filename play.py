@@ -40,8 +40,8 @@ class Actor(object):
 
         ### calibration
         output = [
-            int(joystick[0]*60),
-            int(joystick[1]*60),
+            int(joystick[0]*100),
+            int(joystick[1]*100),
             int(round(joystick[2])),
             int(round(joystick[3])),
             int(round(joystick[4])),
