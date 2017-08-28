@@ -75,72 +75,70 @@ Install vglrun
 
 The mupen64plus install: 
 
-#!/bin/bash
-mkdir mupen64plus-src && cd "$_"
-git clone https://github.com/mupen64plus/mupen64plus-core
-git clone https://github.com/kevinhughes27/mupen64plus-input-bot
-cd mupen64plus-input-bot
-make all
-sudo make install
+	#!/bin/bash
+	mkdir mupen64plus-src && cd "$_" 
+	git clone https://github.com/mupen64plus/mupen64plus-core
+	git clone https://github.com/kevinhughes27/mupen64plus-input-bot
+	cd mupen64plus-input-bot
+	make all
+	sudo make install
 
-#!/bin/bash
-cd gym-mupen64plus
-
-# Install the gym-mupen64plus package (and dependencies)
-pip install -e .
+	cd gym-mupen64plus
+	pip install -e .
 
 For playstation controllers, add (before [Keyboard])in /usr/share/games/mupen64plus/InputAutoCfg.ini
 
-[Sony Computer Entertainment Wireless Controller]
-plugged = True
-plugin = 2
-mouse = False
-AnalogDeadzone = 4096,4096
-AnalogPeak = 32767,32767
-DPad R = hat(0 Right)
-DPad L = hat(0 Left)
-DPad D = hat(0 Down)
-DPad U = hat(0 Up)
-Start = button(9)
-Z Trig = button(6)
-B Button = button(0)
-A Button = button(1)
-C Button R = axis(2+)
-C Button L = axis(2-)
-C Button D = axis(5+)
-C Button U = axis(5-)
-R Trig = button(5)
-L Trig = button(4)
-Mempack switch =
-Rumblepak switch =
-X Axis = axis(0-, 0+)
-Y Axis = axis(1-, 1+)
+	[Sony Computer Entertainment Wireless Controller]
+	plugged = True
+	plugin = 2
+	mouse = False
+	AnalogDeadzone = 4096,4096
+	AnalogPeak = 32767,32767
+	DPad R = hat(0 Right)
+	DPad L = hat(0 Left)
+	DPad D = hat(0 Down)
+	DPad U = hat(0 Up)
+	Start = button(9)
+	Z Trig = button(6)
+	B Button = button(0)
+	A Button = button(1)
+	C Button R = axis(2+)
+	C Button L = axis(2-)
+	C Button D = axis(5+)
+	C Button U = axis(5-)
+	R Trig = button(5)
+	L Trig = button(4)
+	Mempack switch =
+	Rumblepak switch =
+	X Axis = axis(0-, 0+)
+	Y Axis = axis(1-, 1+)
 
 If you use Xbox controller or others, modify in utils.py: 
 
-def _monitor_controller(self):
-        while True:
-            events = get_gamepad()
-            for event in events:
-                if event.code == 'ABS_Y':
-                    self.LeftJoystickY = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
-                elif event.code == 'ABS_X':
-                    self.LeftJoystickX = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+	def _monitor_controller(self):
+        	while True:
+            	events = get_gamepad()
+            	for event in events:
+                	if event.code == 'ABS_Y':
+                    		self.LeftJoystickY = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+                	elif event.code == 'ABS_X':
+                   		 self.LeftJoystickX = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
                     
 by 
 
-def _monitor_controller(self):
-        while True:
-            events = get_gamepad()
-            for event in events:
-                if event.code == 'ABS_Y':
-                    self.LeftJoystickY = (event.state / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
-                elif event.code == 'ABS_X':
-                    self.LeftJoystickX = (event.state / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+	def _monitor_controller(self):
+       		while True:
+            	events = get_gamepad()
+            	for event in events:
+                	if event.code == 'ABS_Y':
+                    		self.LeftJoystickY = (event.state / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
+                	elif event.code == 'ABS_X':
+                    		self.LeftJoystickX = (event.state / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
 
 The goal is to normalize the inputs from record.py to -1 and 1
 
 For TensorFlow:
+
 Create a file ~/.matplotlib/matplotlibrc there and add the following code: 
 
 backend: TkAgg
