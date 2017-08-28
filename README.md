@@ -74,6 +74,7 @@ Install through pip install:
 Install vglrun
 
 The mupen64plus install: 
+
 #!/bin/bash
 mkdir mupen64plus-src && cd "$_"
 git clone https://github.com/mupen64plus/mupen64plus-core
