@@ -40,8 +40,8 @@ class Actor(object):
 
         ### calibration
         output = [
-            int(joystick[0] * 80),
-            int(joystick[1] * 80),
+            int(joystick[0]*60),
+            int(joystick[1]*60),
             int(round(joystick[2])),
             int(round(joystick[3])),
             int(round(joystick[4])),
@@ -57,7 +57,9 @@ class Actor(object):
 
 
 if __name__ == '__main__':
-    env = gym.make('Mario-Kart-Royal-Raceway-v0')
+    env = gym.make('Mario-Kart-Luigi-Raceway-v0')
+    #env = gym.make('Mario-Kart-Kalimari-Desert-v0')
+
 
     obs = env.reset()
     env.render()

@@ -71,31 +71,22 @@ class XboxController(object):
 
 
     def read(self):
-        x = self.LeftJoystickX
-        y = self.LeftJoystickY
-        a = self.A
-        b = self.X # b=1, x=2
+        x = (self.LeftJoystickX)
+        y = (self.LeftJoystickY)
+        a = self.B
+        b = self.A # b=1, x=2
         rb = self.RightBumper
         return [x, y, a, b, rb]
 
- # if you use PS4 controler, you have to change as follows:
- #def _monitor_controller(self):
- #       while True:
- #           events = get_gamepad()
- #           for event in events:
- #               if event.code == 'ABS_Y':
- #                   self.LeftJoystickY = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
- #               elif event.code == 'ABS_X':
- #                   self.LeftJoystickX = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
 
     def _monitor_controller(self):
         while True:
             events = get_gamepad()
             for event in events:
                 if event.code == 'ABS_Y':
-                    self.LeftJoystickY = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
+                    self.LeftJoystickY = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
                 elif event.code == 'ABS_X':
-                    self.LeftJoystickX = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
+                    self.LeftJoystickX = ((event.state-125) / XboxController.MAX_JOY_VAL)*250 # normalize between -1 and 1
                 elif event.code == 'ABS_RY':
                     self.RightJoystickY = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
                 elif event.code == 'ABS_RX':
