@@ -9,6 +9,9 @@ Driving a new (untrained) section of the Royal Raceway:
 
 Driving Luigi Raceway:
 
+	https://youtu.be/iDX9MSksLpc
+
+
 [![LuigiRacewayVideo](/screenshots/luigi_raceway.png?raw=true)](https://youtu.be/vrccd3yeXnc)
 
 The model was trained with:
