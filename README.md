@@ -185,11 +185,29 @@ Training
 --------
 The `train.py` program will train a model using Google's TensorFlow framework and cuDNN for GPU acceleration. Training can take a while (~1 hour) depending on how much data you are training with and your system specs. The program will save the model to disk when it is done.
 
+You can play with the following variables in train.py to improve the model:
+
+create_model(keep_prob = 0.8)
+
+Training loop variables
+    epochs = 100
+    batch_size = 50
+    
+The validation split: validation_split=0.1 (increase the number of validation data set)
+
+
 
 Play
 ----
 The `play.py` program will use the [`gym-mupen64plus`](https://github.com/bzier/gym-mupen64plus) environment to execute the trained agent against the MarioKart environment. The environment will provide the screenshots of the emulator. These images will be sent to the model to acquire the joystick command to send. The AI joystick commands can be overridden by holding the 'LB' button on the controller.
 
+You can also adjust the controller (x100 works fine for me):
+
+	int(joystick[0]*100),
+        int(joystick[1]*100),
+        int(round(joystick[2])),
+        int(round(joystick[3])),
+        int(round(joystick[4])),
 
 Settings VirtualBox
 -------------------
